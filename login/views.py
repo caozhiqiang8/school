@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.shortcuts import HttpResponse,redirect
+from django.shortcuts import HttpResponse,redirect,HttpResponseRedirect
 from django.views.generic import View
 # Create your views here.
 #登录
@@ -12,7 +12,7 @@ class Login(View):
         user = request.POST.get('username', None)
         pwd = request.POST.get('password', None)
         if user == 'admin' and pwd == '1111':
-            return redirect('/school/')
+            return HttpResponseRedirect('/school/')
         else:
             msg = '用户名密码错误'
             return render(request, 'login.html', {'masg': msg})

@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title</title>
+    <script type="text/javascript" src="../static/js/vue.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 </head>
 <body>
-$END$
+
+
+<div id="app" >
+    <span>请输入城市</span><input type="text" v-model="city"  > <input type="button" value="查询" v-on:click="cityClick"  >
+     <p>地址：{{ message }}</p>
+</div>
+
+
+<script type="text/javascript" src="../static/js/axios.min.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message:'',
+            city:''
+        },
+        methods:{
+            cityClick:function () {
+                var that = this;
+                axios.get('https://restapi.amap.com/v3/geocode/geo?address='+that.city +'&key=e4673349d8fce6d7bff389f2b6d82175')
+                .then(function (request) {
+                    that.message = request.data.geocodes[0].formatted_address;
+
+                },function (err) {
+
+                })
+
+            }
+        }
+    })
+
+
+</script>
+
+
 </body>
 </html>
