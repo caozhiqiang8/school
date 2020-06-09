@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户数据查询</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+<!-- 导航 -->
+<nav class="navbar navbar-default ">
+    <div class="container-fluid">
+        <!-- 头 -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">BigData</a>
+        </div>
+        <!-- 导航 -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/school/">学校数据查询 </a></li>
+                <li class="active"><a href="/user/">用户数据查询<span class="sr-only">(current)</span></a></li>
+                <li><a href="#">资源数据查询</a></li>
+                <li><a href="#">课程数据查询</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- 用户查询-->
+<div style="width: 1300px;margin: 0 auto" id='school'>
+    <form class="form-inline" method="post" action="/user/">
+        <div class="form-group">
+            <label for="exampleInputName2">用户ID</label>
+            <input type="text" class="form-control" id="exampleInputName2" name='user_id' placeholder="请输入用户ID">
+            <button type="submit" class="btn btn-default">搜索</button>
+        </div>
+        <div class="form-group" style="margin-left: 20px">
+            <label for="exampleInputName2">用户名</label>
+            <input type="text" class="form-control" id="exampleInputName2" name='user_name' placeholder="请输入用户名">
+            <button type="submit" class="btn btn-default">搜索</button>
+        </div>
+    </form>
+</div>
+
+
+<div style="width: 1300px;margin: auto;margin-top: 50px;">
+    {% if userid_list %}
+    <table class="table table-bordered">
+        <tr>
+            <td>用户id</td>
+            <td>用户名</td>
+            <td>密码</td>
+            <td>创建时间</td>
+            <td>所属学校</td>
+            <td>学校ID</td>
+            <td>有效状态（0有效，1无效）</td>
+        </tr>
+        <tr>
+            <td>{{ userid_list.jid }}</td>
+            <td>{{ userid_list.user_name }}</td>
+            <td>{{ userid_list.password }}</td>
+            <td>{{ userid_list.c_time | date:'Y-m-d H:m' }}</td>
+            <td>{{ userid_list2.name }}</td>
+            <td>{{ userid_list2.school_id }}</td>
+            <td>{{ userid_list2.state_id }}</td>
+
+        </tr>
+    </table>
+   {% endif %}
+    {% if data %}
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>用户ID</th>
+                <th>用户名</th>
+                <th>密码</th>
+                <th>创建时间</th>
+                <th>所属学校</th>
+                <th>学校ID</th>
+                <th>有效状态（0有效，1无效）</th>
+            </tr>
+            </thead>
+            {% for i in data %}
+                <tbody>
+                <tr>
+                    <td>{{ i.jid }}</td>
+                    <td>{{ i.user_name }}</td>
+                    <td>{{ i.password }}</td>
+                    <td>{{ i.c_time | date:'Y-m-d H:m' }}</td>
+                    <td>{{ i.name  }}</td>
+                    <td>{{ i.school_id  }}</td>
+                    <td>{{ i.stat_id  }}</td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+
+    {% else %}
+        {{ masg }}
+    {% endif %}
+</div>
+
+
+</body>
+</html>

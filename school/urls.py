@@ -1,9 +1,9 @@
 from django.urls import path
 from django.conf.urls import url
-from school.views import SchoolIndex
+from school.views import schoolIndex
 
 
 urlpatterns = [
-    path('',SchoolIndex.as_view(),name = 'school')
+    path('',schoolIndex.as_view(),name = 'school')
 
 ]
