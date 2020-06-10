@@ -44,48 +44,68 @@
     </div>
 </nav>
 
-<!-- 用户查询-->
+<!-- 教师查询-->
 <div style="width: 1300px;margin: 0 auto" id='school'>
-    <form class="form-inline" method="post" action="/user/">
-        <div class="form-group">
-            <label for="exampleInputName2">用户ID</label>
-            <input type="text" class="form-control" id="exampleInputName2" name='user_id' placeholder="请输入用户ID">
+    <form class="form-inline" method="post" action="/user/teacher/">
+        <div class="form-group" >
+            <label for="exampleInputName2">教师用户名：</label>
+            <input type="text" class="form-control" id="exampleInputName2" name='usertea_name' placeholder="请输入教师用户名">
             <button type="submit" class="btn btn-default">搜索</button>
         </div>
-        <div class="form-group" style="margin-left: 20px">
-            <label for="exampleInputName2">用户名</label>
-            <input type="text" class="form-control" id="exampleInputName2" name='user_name' placeholder="请输入用户名">
+        <div class="form-group" style="margin-left: 100px">
+            <label for="exampleInputName2">教师用户ID：</label>
+            <input type="text" class="form-control" id="exampleInputName2" name='usertea_id' placeholder="请输入教师用户ID">
             <button type="submit" class="btn btn-default">搜索</button>
         </div>
+
+    </form>
+</div>
+
+<!-- 学生查询-->
+<div style="width: 1300px;margin: 30px auto" id='school'>
+    <form class="form-inline" method="post" action="/user/student/">
+        <div class="form-group" >
+            <label for="exampleInputName2">学生用户名：</label>
+            <input type="text" class="form-control" id="exampleInputName2" name='userstu_name' placeholder="请输入学生用户名">
+            <button type="submit" class="btn btn-default">搜索</button>
+        </div>
+        <div class="form-group" style="margin-left: 100px">
+            <label for="exampleInputName2">学生用户ID：</label>
+            <input type="text" class="form-control" id="exampleInputName2" name='userstu_id' placeholder="请输入学生用户ID">
+            <button type="submit" class="btn btn-default">搜索</button>
+        </div>
+
     </form>
 </div>
 
 
 <div style="width: 1300px;margin: auto;margin-top: 50px;">
+<!-- 教师数据呈现-->
     {% if userid_list %}
-    <table class="table table-bordered">
-        <tr>
-            <td>用户id</td>
-            <td>用户名</td>
-            <td>密码</td>
-            <td>创建时间</td>
-            <td>所属学校</td>
-            <td>学校ID</td>
-            <td>有效状态（0有效，1无效）</td>
-        </tr>
-        <tr>
-            <td>{{ userid_list.jid }}</td>
-            <td>{{ userid_list.user_name }}</td>
-            <td>{{ userid_list.password }}</td>
-            <td>{{ userid_list.c_time | date:'Y-m-d H:m' }}</td>
-            <td>{{ userid_list2.name }}</td>
-            <td>{{ userid_list2.school_id }}</td>
-            <td>{{ userid_list2.state_id }}</td>
+        <table class="table table-bordered">
+            <tr>
+                <td>用户id</td>
+                <td>用户名</td>
+                <td>密码</td>
+                <td>创建时间</td>
+                <td>所属学校</td>
+                <td>学校ID</td>
+                <td>有效状态（0有效，1无效）</td>
+            </tr>
+            <tr>
+                <td>{{ userid_list.jid }}</td>
+                <td>{{ userid_list.user_name }}</td>
+                <td>{{ userid_list.password }}</td>
+                <td>{{ userid_list.c_time | date:'Y-m-d H:m' }}</td>
+                <td>{{ userid_list2.name }}</td>
+                <td>{{ userid_list2.school_id }}</td>
+                <td>{{ userid_list2.state_id }}</td>
 
-        </tr>
-    </table>
-   {% endif %}
-    {% if data %}
+            </tr>
+        </table>
+    {% endif %}
+
+    {% if data_list %}
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -98,16 +118,16 @@
                 <th>有效状态（0有效，1无效）</th>
             </tr>
             </thead>
-            {% for i in data %}
+            {% for i in data_list %}
                 <tbody>
                 <tr>
                     <td>{{ i.jid }}</td>
                     <td>{{ i.user_name }}</td>
                     <td>{{ i.password }}</td>
                     <td>{{ i.c_time | date:'Y-m-d H:m' }}</td>
-                    <td>{{ i.name  }}</td>
-                    <td>{{ i.school_id  }}</td>
-                    <td>{{ i.stat_id  }}</td>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.school_id }}</td>
+                    <td>{{ i.state_id }}</td>
                 </tr>
                 </tbody>
             {% endfor %}
