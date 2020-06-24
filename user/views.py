@@ -20,8 +20,8 @@ class userTea(View):
         return redirect('/user/')
 
     def post(self, request):
-        usertea_id = request.POST.get("usertea_id", None)
-        usertea_name = request.POST.get("usertea_name", None)
+        usertea_id = request.POST.get("usertea_id", 0)
+        usertea_name = request.POST.get("usertea_name", 0)
 
         try:
             if usertea_name:
