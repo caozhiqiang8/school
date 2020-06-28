@@ -23,6 +23,7 @@ urlpatterns = [
     path('login/', include('login.urls')),
     path('school/',include('school.urls')),
     path('user/',include('user.urls')),
+    path('resource/',include('resource.urls')),
 
 
 ]
